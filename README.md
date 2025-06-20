@@ -1,4 +1,4 @@
-# 📁 Droply — A Dropbox-like Cloud Storage App
+# 📁 Droply — A Dropbox-like File Storage App
 
 Droply is a modern, full-stack file-Storage built with **Next.js**, **Clerk authentication**, **Neon DB**, **Drizzle ORM**, and **ImageKit** for file uploads. It allows users to securely upload, organize, preview, and download their files and folders with rich features like starring, trash management, and more.
 
@@ -45,5 +45,47 @@ Droply is a modern, full-stack file-Storage built with **Next.js**, **Clerk auth
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/droply.git
-cd droply
+https://github.com/Prince5598/Droply-File-storage.git
+cd your-folder-name
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Setup .env.local
+```env
+CLERK_PUBLISHABLE_KEY=your_clerk_public_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
+IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
+IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id
+
+DATABASE_URL=your_neon_postgres_url
+```
+
+### 4. Create & Run database 
+```bash
+npm run db:generate
+npm run db:push
+```
+
+### 5. Start the dev server
+```bash
+npm run dev
+```
+ - Open http://localhost:3000 to view the app.
+
+---
+## 🧠 How It Works (Architecture)
+- Clerk handles authentication and user sessions.
+
+- Files/Folders are stored relationally using Drizzle ORM and Neon DB, supporting self-referencing folder structures.
+
+- Uploads are sent to ImageKit with metadata saved in the database.
+
+- Previews use direct URLs from ImageKit (for images, PDFs, etc.).
+
+- Trash logic uses soft-trash flags (isTrashed), and emptying trash deletes records permanently.
